@@ -1,0 +1,36 @@
+{
+  "name": "startkit-cli",
+  "version": "1.0.0",
+  "description": "Quick start your project",
+  "main": "src/startkit.js",
+  "bin": "src/startkit.js",
+  "scripts": {
+    "start": "set DEBUG=*,-babel && npm run build && node dist/startkit.js",
+    "build": "babel src -d dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sky0014/startkit-cli.git"
+  },
+  "keywords": [
+    "node",
+    "startkit",
+    "cli"
+  ],
+  "author": "sky0014 <sky-wang@qq.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/sky0014/startkit-cli/issues"
+  },
+  "homepage": "https://github.com/sky0014/startkit-cli/#readme",
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.24.1",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0"
+  },
+  "dependencies": {
+    "commander": "^2.9.0",
+    "promptly": "^2.2.0"
+  }
+}
