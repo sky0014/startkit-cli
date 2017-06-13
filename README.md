@@ -4,7 +4,7 @@ Quick start your project
 
 # install
     
-    $ npm install startkit -g
+    $ npm install startkit-cli -g
 
 # usage
 
