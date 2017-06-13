@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Quick start your project",
   "main": "src/startkit.js",
-  "bin": "src/startkit.js",
+  "bin": {
+    "startkit": "src/startkit.js"
+  },
   "scripts": {
     "start": "set DEBUG=*,-babel && npm run build && node dist/startkit.js",
     "build": "babel src -d dist"
