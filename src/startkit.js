@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import download from "download-github-repo";
 import program from "commander";
 import promptly from "promptly";
@@ -102,14 +104,20 @@ async function walkFile(path, callback) {
   }
 }
 
-program.version("0.0.1").usage(`<command> [options]`);
+//VERSION from package.json with babel-plugin-version-transform
+program.version(VERSION).usage(`<command> [options]`);
 
 program.command("list [name]").description("Show templates").action(doShowList);
 
 program
   .command("install <name>")
+  .alias("i")
   .description("Install template name")
   .option("-p, --path <path>", "Install path")
   .action(doInstall);
 
 program.parse(process.argv);
+
+if (process.argv.length <= 2) {
+  program.help();
+}

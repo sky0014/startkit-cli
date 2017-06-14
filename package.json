@@ -1,14 +1,15 @@
 {
   "name": "startkit-cli",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "description": "Quick start your project",
-  "main": "src/startkit.js",
+  "main": "dist/startkit.js",
   "bin": {
-    "startkit": "src/startkit.js"
+    "startkit": "dist/startkit.js"
   },
   "scripts": {
     "start": "set DEBUG=*,-babel && npm run build && node dist/startkit.js",
-    "build": "babel src -d dist"
+    "build": "babel src -d dist",
+    "publish": "npm run build && npm publish"
   },
   "repository": {
     "type": "git",
@@ -29,10 +30,12 @@
     "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.23.0"
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-plugin-version-transform": "^1.0.0"
   },
   "dependencies": {
     "commander": "^2.9.0",
+    "download-github-repo": "^0.1.3",
     "promptly": "^2.2.0"
   }
 }

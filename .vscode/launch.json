@@ -17,10 +17,7 @@
             "env": {
                 "DEBUG": "*,-babel"
             },
-            "args": [
-                "install",
-                "node"
-            ]
+            "args": []
         },
         {
             "type": "node",
