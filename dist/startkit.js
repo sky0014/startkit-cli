@@ -100,6 +100,7 @@ async function doReplace(path) {
       _fs2.default.writeFileSync(file, input.replace(/\${PROJECT_NAME}/g, projectName).replace(/\${PROJECT_DESCRIPTION}/g, projectDescription).replace(/\${AUTHOR}/g, author).replace(/\${EMAIL}/g, email).replace(/\${GITHUB}/g, github));
     });
     print("Install complete");
+    process.exit();
   }
 }
 
@@ -118,7 +119,7 @@ async function walkFile(path, callback) {
 }
 
 //VERSION from package.json with babel-plugin-version-transform
-_commander2.default.version("1.0.6").usage(`<command> [options]`);
+_commander2.default.version("1.0.7").usage(`<command> [options]`);
 
 _commander2.default.command("list [name]").description("Show templates").action(doShowList);
 

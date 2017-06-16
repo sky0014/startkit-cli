@@ -95,6 +95,7 @@ async function doReplace(path) {
       );
     });
     print("Install complete");
+    process.exit();
   }
 }
 
