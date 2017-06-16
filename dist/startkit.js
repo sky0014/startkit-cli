@@ -21,16 +21,14 @@ var _path = require("path");
 
 var _path2 = _interopRequireDefault(_path);
 
-var _templates = require("./templates");
-
-var _templates2 = _interopRequireDefault(_templates);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const templates = require("../templates.json");
 
 const print = console.log;
 
 function search(name) {
-  for (let template of _templates2.default) {
+  for (let template of templates) {
     if (name === template.name) return template;
   }
 }
@@ -47,7 +45,7 @@ function doShowList(name) {
     }
   } else {
     print("Available templates:\n");
-    _templates2.default.forEach(template => {
+    templates.forEach(template => {
       print(`\t${template.name}\t${template.description}`);
     });
   }
@@ -78,6 +76,8 @@ async function doReplace(path) {
   let projectName = "your project name";
   let projectDescription = "your project description";
   let author = "your name";
+  let email = "your email";
+  let github = "your github repository";
   projectName = await _promptly2.default.prompt(`Project Name(${projectName}): `, {
     default: projectName
   });
@@ -85,13 +85,19 @@ async function doReplace(path) {
   author = await _promptly2.default.prompt(`Author Name(${author}): `, {
     default: author
   });
+  email = await _promptly2.default.prompt(`Author Email(${email}): `, {
+    default: email
+  });
+  github = await _promptly2.default.prompt(`Github Repository(${github}): `, {
+    default: github
+  });
   let confirm = await _promptly2.default.confirm("Are you sure?(yes or no)");
   if (!confirm) {
     doReplace(path);
   } else {
     walkFile(path, file => {
       let input = _fs2.default.readFileSync(file).toString();
-      _fs2.default.writeFileSync(file, input.replace(/\${PROJECT_NAME}/g, projectName).replace(/\${PROJECT_DESCRIPTION}/g, projectDescription).replace(/\${AUTHOR}/g, author));
+      _fs2.default.writeFileSync(file, input.replace(/\${PROJECT_NAME}/g, projectName).replace(/\${PROJECT_DESCRIPTION}/g, projectDescription).replace(/\${AUTHOR}/g, author).replace(/\${EMAIL}/g, email).replace(/\${GITHUB}/g, github));
     });
     print("Install complete");
   }
@@ -112,7 +118,7 @@ async function walkFile(path, callback) {
 }
 
 //VERSION from package.json with babel-plugin-version-transform
-_commander2.default.version("1.0.5").usage(`<command> [options]`);
+_commander2.default.version("1.0.6").usage(`<command> [options]`);
 
 _commander2.default.command("list [name]").description("Show templates").action(doShowList);
 

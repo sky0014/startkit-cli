@@ -6,7 +6,7 @@ import promptly from "promptly";
 import fs from "fs";
 import nodepath from "path";
 
-import templates from "./templates";
+const templates = require("../templates.json");
 
 const print = console.log;
 
@@ -60,6 +60,8 @@ async function doReplace(path) {
   let projectName = "your project name";
   let projectDescription = "your project description";
   let author = "your name";
+  let email = "your email";
+  let github = "your github repository";
   projectName = await promptly.prompt(`Project Name(${projectName}): `, {
     default: projectName
   });
@@ -69,6 +71,12 @@ async function doReplace(path) {
   );
   author = await promptly.prompt(`Author Name(${author}): `, {
     default: author
+  });
+  email = await promptly.prompt(`Author Email(${email}): `, {
+    default: email
+  });
+  github = await promptly.prompt(`Github Repository(${github}): `, {
+    default: github
   });
   let confirm = await promptly.confirm("Are you sure?(yes or no)");
   if (!confirm) {
@@ -82,6 +90,8 @@ async function doReplace(path) {
           .replace(/\${PROJECT_NAME}/g, projectName)
           .replace(/\${PROJECT_DESCRIPTION}/g, projectDescription)
           .replace(/\${AUTHOR}/g, author)
+          .replace(/\${EMAIL}/g, email)
+          .replace(/\${GITHUB}/g, github)
       );
     });
     print("Install complete");
