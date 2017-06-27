@@ -21,9 +21,11 @@ var _path = require("path");
 
 var _path2 = _interopRequireDefault(_path);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _requestPromiseNative = require("request-promise-native");
 
-const templates = require("../templates.json");
+var _requestPromiseNative2 = _interopRequireDefault(_requestPromiseNative);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const print = console.log;
 
@@ -118,15 +120,27 @@ async function walkFile(path, callback) {
   }
 }
 
-//VERSION from package.json with babel-plugin-version-transform
-_commander2.default.version("1.0.7").usage(`<command> [options]`);
+let templates = require("../templates.json");
 
-_commander2.default.command("list [name]").description("Show templates").action(doShowList);
+async function main() {
+  try {
+    templates = JSON.parse((await (0, _requestPromiseNative2.default)("https://raw.githubusercontent.com/sky0014/startkit-cli/master/templates.json")));
+  } catch (e) {
+    print(`failed to fetch templates.json, use default instead. ${e}`);
+  }
 
-_commander2.default.command("install <name>").alias("i").description("Install template name").option("-p, --path <path>", "Install path").action(doInstall);
+  //VERSION from package.json with babel-plugin-version-transform
+  _commander2.default.version("1.0.8").usage(`<command> [options]`);
 
-_commander2.default.parse(process.argv);
+  _commander2.default.command("list [name]").description("Show templates").action(doShowList);
 
-if (process.argv.length <= 2) {
-  _commander2.default.help();
+  _commander2.default.command("install <name>").alias("i").description("Install template name").option("-p, --path <path>", "Install path").action(doInstall);
+
+  _commander2.default.parse(process.argv);
+
+  if (process.argv.length <= 2) {
+    _commander2.default.help();
+  }
 }
+
+main();

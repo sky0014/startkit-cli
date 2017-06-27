@@ -17,7 +17,9 @@
             "env": {
                 "DEBUG": "*,-babel"
             },
-            "args": []
+            "args": [
+                "list"
+            ]
         },
         {
             "type": "node",

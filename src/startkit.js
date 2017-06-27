@@ -5,8 +5,7 @@ import program from "commander";
 import promptly from "promptly";
 import fs from "fs";
 import nodepath from "path";
-
-const templates = require("../templates.json");
+import rp from "request-promise-native";
 
 const print = console.log;
 
@@ -115,20 +114,39 @@ async function walkFile(path, callback) {
   }
 }
 
-//VERSION from package.json with babel-plugin-version-transform
-program.version(VERSION).usage(`<command> [options]`);
+let templates = require("../templates.json");
 
-program.command("list [name]").description("Show templates").action(doShowList);
+async function main() {
+  try {
+    templates = JSON.parse(
+      await rp(
+        "https://raw.githubusercontent.com/sky0014/startkit-cli/master/templates.json"
+      )
+    );
+  } catch (e) {
+    print(`failed to fetch templates.json, use default instead. ${e}`);
+  }
 
-program
-  .command("install <name>")
-  .alias("i")
-  .description("Install template name")
-  .option("-p, --path <path>", "Install path")
-  .action(doInstall);
+  //VERSION from package.json with babel-plugin-version-transform
+  program.version(VERSION).usage(`<command> [options]`);
 
-program.parse(process.argv);
+  program
+    .command("list [name]")
+    .description("Show templates")
+    .action(doShowList);
 
-if (process.argv.length <= 2) {
-  program.help();
+  program
+    .command("install <name>")
+    .alias("i")
+    .description("Install template name")
+    .option("-p, --path <path>", "Install path")
+    .action(doInstall);
+
+  program.parse(process.argv);
+
+  if (process.argv.length <= 2) {
+    program.help();
+  }
 }
+
+main();
