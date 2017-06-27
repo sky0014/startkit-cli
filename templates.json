@@ -2,11 +2,16 @@
   {
     "name": "node",
     "github": "sky0014/template-node-server",
-    "description": "A simple es6 node template"
+    "description": "A simple es6 node template."
   },
   {
     "name": "npm",
     "github": "sky0014/template-npm-package",
     "description": "A simple npm package template, npm run pub to publish!"
+  },
+  {
+    "name": "web",
+    "github": "sky0014/template-web-webpack",
+    "description": "A webpack web template."
   }
 ]
