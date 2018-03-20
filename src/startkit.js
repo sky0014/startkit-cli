@@ -40,13 +40,12 @@ function doInstall(name, options) {
       \t${template.name}\t${template.description}
     `);
     print("Downloading...");
-    let path = template.name;
-    if (options && options.path) path = options.path;
+    let path = "temp_" + parseInt(Date.now() * Math.random()).toString(16);
     download(template.github, path, err => {
       if (err) print(err);
       else {
         print("Download complete");
-        doReplace(path);
+        doReplace(path, options);
       }
     });
   } else {
@@ -54,7 +53,7 @@ function doInstall(name, options) {
   }
 }
 
-async function doReplace(path) {
+async function doReplace(path, options) {
   print("Installing...");
   let projectName = "your project name";
   let projectDescription = "your project description";
@@ -93,6 +92,10 @@ async function doReplace(path) {
           .replace(/\${GITHUB}/g, github)
       );
     });
+    //move directory
+    let realpath = projectName;
+    if (options && options.path) realpath = options.path;
+    fs.renameSync(path, realpath);
     print("Install complete");
     process.exit();
   }

@@ -1,6 +1,6 @@
 {
   "name": "startkit-cli",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Quick start your project",
   "main": "dist/startkit.js",
   "bin": {
@@ -15,11 +15,7 @@
     "type": "git",
     "url": "git+https://github.com/sky0014/startkit-cli.git"
   },
-  "keywords": [
-    "node",
-    "startkit",
-    "cli"
-  ],
+  "keywords": ["node", "startkit", "cli"],
   "author": "sky0014 <sky-wang@qq.com>",
   "license": "Apache-2.0",
   "bugs": {

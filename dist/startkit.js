@@ -60,12 +60,11 @@ function doInstall(name, options) {
       \t${template.name}\t${template.description}
     `);
     print("Downloading...");
-    let path = template.name;
-    if (options && options.path) path = options.path;
+    let path = "temp_" + parseInt(Date.now() * Math.random()).toString(16);
     (0, _downloadGithubRepo2.default)(template.github, path, err => {
       if (err) print(err);else {
         print("Download complete");
-        doReplace(path);
+        doReplace(path, options);
       }
     });
   } else {
@@ -73,7 +72,7 @@ function doInstall(name, options) {
   }
 }
 
-async function doReplace(path) {
+async function doReplace(path, options) {
   print("Installing...");
   let projectName = "your project name";
   let projectDescription = "your project description";
@@ -101,6 +100,10 @@ async function doReplace(path) {
       let input = _fs2.default.readFileSync(file).toString();
       _fs2.default.writeFileSync(file, input.replace(/\${PROJECT_NAME}/g, projectName).replace(/\${PROJECT_DESCRIPTION}/g, projectDescription).replace(/\${AUTHOR}/g, author).replace(/\${EMAIL}/g, email).replace(/\${GITHUB}/g, github));
     });
+    //move directory
+    let realpath = projectName;
+    if (options && options.path) realpath = options.path;
+    _fs2.default.renameSync(path, realpath);
     print("Install complete");
     process.exit();
   }
@@ -130,7 +133,7 @@ async function main() {
   }
 
   //VERSION from package.json with babel-plugin-version-transform
-  _commander2.default.version("1.0.8").usage(`<command> [options]`);
+  _commander2.default.version("1.0.9").usage(`<command> [options]`);
 
   _commander2.default.command("list [name]").description("Show templates").action(doShowList);
 
