@@ -29,13 +29,30 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 const print = console.log;
 
-function search(name) {
+let templates;
+
+async function fetchTemplates() {
+  if (templates) {
+    return;
+  }
+
+  try {
+    templates = JSON.parse((await (0, _requestPromiseNative2.default)("https://raw.githubusercontent.com/sky0014/startkit-cli/master/templates.json")));
+  } catch (e) {
+    templates = require("../templates.json");
+    print(`failed to fetch templates.json: ${e}, use default instead.`);
+  }
+}
+
+async function search(name) {
   for (let template of templates) {
     if (name === template.name) return template;
   }
 }
 
-function doShowList(name) {
+async function doShowList(name) {
+  await fetchTemplates();
+
   if (name) {
     const template = search(name);
     if (template) {
@@ -53,7 +70,9 @@ function doShowList(name) {
   }
 }
 
-function doInstall(name, options) {
+async function doInstall(name, options) {
+  await fetchTemplates();
+
   const template = search(name);
   if (template) {
     print(`Found templates:
@@ -123,17 +142,9 @@ async function walkFile(path, callback) {
   }
 }
 
-let templates = require("../templates.json");
-
 async function main() {
-  try {
-    templates = JSON.parse((await (0, _requestPromiseNative2.default)("https://raw.githubusercontent.com/sky0014/startkit-cli/master/templates.json")));
-  } catch (e) {
-    print(`failed to fetch templates.json, use default instead. ${e}`);
-  }
-
   //VERSION from package.json with babel-plugin-version-transform
-  _commander2.default.version("1.0.9").usage(`<command> [options]`);
+  _commander2.default.version("1.0.10").usage(`<command> [options]`);
 
   _commander2.default.command("list [name]").description("Show templates").action(doShowList);
 

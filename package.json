@@ -1,6 +1,6 @@
 {
   "name": "startkit-cli",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Quick start your project",
   "main": "dist/startkit.js",
   "bin": {
@@ -9,13 +9,17 @@
   "scripts": {
     "start": "set DEBUG=*,-babel && npm run build && node dist/startkit.js",
     "build": "babel src -d dist",
-    "pub": "npm run build && npm publish"
+    "pub": "npm run build && npm publish --registry=http://registry.npmjs.org"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sky0014/startkit-cli.git"
   },
-  "keywords": ["node", "startkit", "cli"],
+  "keywords": [
+    "node",
+    "startkit",
+    "cli"
+  ],
   "author": "sky0014 <sky-wang@qq.com>",
   "license": "Apache-2.0",
   "bugs": {
