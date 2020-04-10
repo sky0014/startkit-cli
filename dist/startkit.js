@@ -44,7 +44,7 @@ async function fetchTemplates() {
   }
 }
 
-async function search(name) {
+function search(name) {
   for (let template of templates) {
     if (name === template.name) return template;
   }
@@ -60,7 +60,7 @@ async function doShowList(name) {
       \t${template.name}\t${template.description}
     `);
     } else {
-      print(`Not Found ${name}`);
+      print(`Template ${name} Not Found`);
     }
   } else {
     print("Available templates:\n");
@@ -144,7 +144,7 @@ async function walkFile(path, callback) {
 
 async function main() {
   //VERSION from package.json with babel-plugin-version-transform
-  _commander2.default.version("1.0.10").usage(`<command> [options]`);
+  _commander2.default.version("1.0.11").usage(`<command> [options]`);
 
   _commander2.default.command("list [name]").description("Show templates").action(doShowList);
 

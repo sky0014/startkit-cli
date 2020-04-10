@@ -1,6 +1,6 @@
 {
   "name": "startkit-cli",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Quick start your project",
   "main": "dist/startkit.js",
   "bin": {
