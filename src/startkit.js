@@ -28,7 +28,7 @@ async function fetchTemplates() {
   }
 }
 
-async function search(name) {
+function search(name) {
   for (let template of templates) {
     if (name === template.name) return template;
   }
@@ -44,7 +44,7 @@ async function doShowList(name) {
       \t${template.name}\t${template.description}
     `);
     } else {
-      print(`Not Found ${name}`);
+      print(`Template ${name} Not Found`);
     }
   } else {
     print("Available templates:\n");
