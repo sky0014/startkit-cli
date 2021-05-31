@@ -13,5 +13,10 @@
     "name": "web",
     "github": "sky0014/template-web-webpack",
     "description": "A webpack web template."
+  },
+  {
+    "name": "node-ts",
+    "github": "sky0014/template-node-ts",
+    "description": "A simple ts node template."
   }
 ]
