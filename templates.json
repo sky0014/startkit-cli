@@ -18,5 +18,10 @@
     "name": "node-ts",
     "github": "sky0014/template-node-ts",
     "description": "A simple ts node template."
-  }
+  },
+  {
+    "name": "web_new",
+    "github": "sky0014/template-webpack5-react-stylus",
+    "description": "A simple web project template using webpack5, react, stylus, postcss etc."
+  },
 ]
