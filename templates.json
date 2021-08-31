@@ -23,5 +23,5 @@
     "name": "web_new",
     "github": "sky0014/template-webpack5-react-stylus",
     "description": "A simple web project template using webpack5, react, stylus, postcss etc."
-  },
+  }
 ]
