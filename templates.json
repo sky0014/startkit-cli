@@ -10,6 +10,11 @@
     "description": "A simple npm package template, npm run pub to publish!"
   },
   {
+    "name": "npm-ts",
+    "github": "sky0014/template-npm-package-ts",
+    "description": "A simple template for npm package with typescript."
+  },
+  {
     "name": "web",
     "github": "sky0014/template-web-webpack",
     "description": "A webpack web template."
